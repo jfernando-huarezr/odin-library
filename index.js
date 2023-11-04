@@ -6,6 +6,8 @@ function Book() {
 }
 
 const myLibrary = []
+let typeOperation = 0
+let positionUpdate
 
 const buttonAddBook = document.querySelector(".navbar button")
 const gridBooks = document.querySelector(".grid-books")
@@ -15,19 +17,79 @@ const submit = form.querySelector("button")
 
 buttonAddBook.addEventListener('click', () => {
     modal.classList.toggle("visible")
+    typeOperation = 0
 })
 
 
-
+//close the modal if click out of the form box
 modal.addEventListener('click', (e) => {
     if (e.target == modal) {
         modal.classList.toggle("visible")
+        form.reset()
     }
 })
 
 form.addEventListener('submit', (e) => {
     e.preventDefault()
     
+    if (typeOperation == 0) {
+        createBook()
+    }
+
+    else {
+        updateBook()
+    }
+
+    drawBooks();
+
+    form.reset()
+    modal.classList.toggle("visible")
+
+})
+
+function buttonUpdateBook(event) {
+    const element = event.currentTarget
+    positionUpdate = element.dataset.position
+    typeOperation = 1;
+
+    modal.classList.toggle("visible")
+
+    const inputs = document.querySelectorAll("input")
+
+    inputs.forEach(element => {
+
+        if (element.value == "on") {
+            element.checked = myLibrary[positionUpdate].status
+        }
+        else {
+            switch (element.name) {
+                case "name" : element.value = myLibrary[positionUpdate].name; break;
+                case "author": element.value = myLibrary[positionUpdate].author; break;
+                case "pages": element.value = myLibrary[positionUpdate].pages; break;
+            }
+        }        
+    })
+}
+
+function updateBook() {
+    const inputs = document.querySelectorAll("input")
+
+    inputs.forEach(element => {
+
+        if (element.value == "on") {
+            myLibrary[positionUpdate].status = element.checked
+        }
+        else {
+            switch (element.name) {
+                case "name" : myLibrary[positionUpdate].name = element.value; break;
+                case "author": myLibrary[positionUpdate].author = element.value; break;
+                case "pages": myLibrary[positionUpdate].pages = element.value; break;
+            }
+        }        
+    })
+}
+
+function createBook() {
     const inputs = document.querySelectorAll("input")
     const book = new Book
 
@@ -46,19 +108,6 @@ form.addEventListener('submit', (e) => {
     })
 
     myLibrary.push(book)
-
-    drawBooks();
-
-    form.reset()
-    modal.classList.toggle("visible")
-
-})
-
-function updateBook(event) {
-    const element = event.currentTarget
-    const data = element.dataset.position
-
-    console.log(data)
 }
 
 function changeStatus(event) {
@@ -100,7 +149,7 @@ function drawBooks() {
             </div>
             <div class="icons">
                 <div>                      
-                    <button onclick="updateBook(event)" data-position="${index}"><i class="fa-solid fa-pen-to-square"></i></button>
+                    <button onclick="buttonUpdateBook(event)" data-position="${index}"><i class="fa-solid fa-pen-to-square"></i></button>
                     <button onclick="deleteBook(event)" data-position="${index}"><i class="fa-solid fa-trash"></i></button>
                 </div>
             </div>
