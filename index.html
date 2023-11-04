@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odin Library</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+   <header>
+    <div class="navbar">
+        <div class="logo">My Logo</div>
+        <div><button>Add a book!</button></div>
+        <div>My Library</div>
+    </div>
+   </header>
+
+   <main>
+    <section class="show-section">
+        <article class="grid-books">
+<!--             <div class="card">
+                <div>
+                    <h2>Book Name</h2>
+                    <p>Pages</p>
+                    <p>Author</p>
+                    <p>Read or not?</p>
+                </div>
+                <div class="icons">
+                    <div>                      
+                        <button><i class="fa-solid fa-pen-to-square" data-number=""></i></button>
+                        <button><i class="fa-solid fa-trash" data-number=""></i></button>
+                    </div>
+                </div>
+            </div> -->
+
+        </article>
+    </section>
+   </main>
+
+   <section class="modal-container visible">
+    <div class="modal">
+        <form action="#">
+            <h3>Add a book here</h3>
+            <label class="spacer" for="name">Book Name:</label>
+            <input type="text" id="name" name="name" max="100" required/>
+
+            <label class="spacer" for="author">Author:</label>
+            <input type="text" id="author" name="author" max="100" required/>
+
+            <label class="spacer" for="pages">Number of pages:</label>
+            <input type="number" id="pages" name="pages" min="10" max="2000" required/>
+
+            <div class="status-div spacer">
+                <label for="status">I read it</label>
+                <input type="checkbox" id="status" name="status"/>
+            </div>
+
+            <div class="button-div spacer"><button type="submit">Submit</button></div>
+        </form>
+    </div>
+   </section>
+
+    
+    <script src="./index.js"></script>
+</body>
+</html>
